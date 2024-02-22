@@ -3,12 +3,18 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    const middle=Math.ceil(nums.length/2)
-console.log(middle)
-if(middle==1){
-    return nums[0]
-}
+   let candidate = null;
+    let count = 0;
 
-    return nums.sort((a,b)=>a-b)[middle-1]
+    // Boyer-Moore Voting Algorithm
+    for (let num of nums) {
+        if (count === 0) {
+            candidate = num;
+        }
+
+        count += (num === candidate) ? 1 : -1;
+    }
+
+    return candidate;
  
 };
